@@ -23,7 +23,7 @@ AC_SUBST(lt_major)
 AC_SUBST(lt_revision)
 AC_SUBST(lt_age)
 
-all_drivers="upekts upektc upeksonly vcom5s uru4000 fdu2000 aes1610 aes1660 aes2501 aes2550 aes2660 aes3500 aes4000 vfs101 vfs301 vfs5011 upektc_img etes603"
+all_drivers="upekts upektc upeksonly vcom5s uru4000 fdu2000 aes1610 aes1660 aes2501 aes2550 aes2660 aes3500 aes4000 vfs101 vfs301 vfs5011 upektc_img etes603 vcs"
 
 require_imaging='no'
 require_aeslib='no'
@@ -48,6 +48,7 @@ enable_vfs301='no'
 enable_vfs5011='no'
 enable_upektc_img='no'
 enable_etes603='no'
+enable_vcs='no'
 
 AC_ARG_WITH([drivers],[AS_HELP_STRING([--with-drivers],
 	[List of drivers to enable])],
@@ -149,6 +150,10 @@ for driver in `echo ${drivers} | sed -e 's/,/ /g' -e 's/,$//g'`; do
 		etes603)
 			AC_DEFINE([ENABLE_ETES603], [], [Build EgisTec ES603 driver])
 			enable_etes603="yes"
+                ;;
+		vcs)
+			AC_DEFINE([ENABLE_VCS], [], [Build Validity Sensors driver])
+			enable_vcs="yes"
 		;;
 	esac
 done
@@ -175,7 +180,7 @@ AM_CONDITIONAL([ENABLE_VFS301], [test "$enable_vfs301" = "yes"])
 AM_CONDITIONAL([ENABLE_VFS5011], [test "$enable_vfs5011" = "yes"])
 AM_CONDITIONAL([ENABLE_UPEKTC_IMG], [test "$enable_upektc_img" = "yes"])
 AM_CONDITIONAL([ENABLE_ETES603], [test "$enable_etes603" = "yes"])
-
+AM_CONDITIONAL([ENABLE_VCS], [test "$enable_vcs" = "yes"])
 
 PKG_CHECK_MODULES(LIBUSB, [libusb-1.0 >= 0.9.1])
 AC_SUBST(LIBUSB_CFLAGS)
@@ -396,6 +401,11 @@ if test x$enable_etes603 != xno ; then
 else
 	AC_MSG_NOTICE([   etes603 driver disabled])
 fi
+if test x$enable_vcs != xno ; then
+        AC_MSG_NOTICE([** validity sensors driver enabled])
+else
+	AC_MSG_NOTICE([   validity sensors driver disabled])
+fi		
 if test x$require_aeslib != xno ; then
 	AC_MSG_NOTICE([** aeslib helper functions enabled])
 else

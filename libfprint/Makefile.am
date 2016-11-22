@@ -21,6 +21,10 @@ VFS301_SRC = drivers/vfs301.c drivers/vfs301_proto.c  drivers/vfs301_proto.h dri
 VFS5011_SRC = drivers/vfs5011.c drivers/vfs5011_proto.h
 UPEKTC_IMG_SRC = drivers/upektc_img.c drivers/upektc_img.h
 ETES603_SRC = drivers/etes603.c
+VCS_SRCS    = drivers/validity/vfsDriver.c \
+drivers/validity/vfsDriver.h \
+drivers/validity/vfsWrapper.h
+
 
 EXTRA_DIST = \
 	$(UPEKE2_SRC)		\
@@ -40,6 +44,7 @@ EXTRA_DIST = \
 	$(VFS101_SRC)		\
 	$(VFS301_SRC)		\
 	$(VFS5011_SRC)		\
+	$(VCS_SRC)          \
 	$(UPEKTC_IMG_SRC)	\
 	$(ETES603_SRC)		\
 	drivers/aesx660.c	\
@@ -174,6 +179,10 @@ endif
 
 if ENABLE_VFS5011
 DRIVER_SRC += $(VFS5011_SRC)
+endif
+
+if ENABLE_VCS
+DRIVER_SRC += $(VCS_SRCS)
 endif
 
 if ENABLE_UPEKTC_IMG

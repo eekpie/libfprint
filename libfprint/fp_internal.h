@@ -233,6 +233,9 @@ enum fp_print_data_type fpi_driver_get_data_type(struct fp_driver *drv);
 /* flags for fp_img_driver.flags */
 #define FP_IMGDRV_SUPPORTS_UNCONDITIONAL_CAPTURE (1 << 0)
 
+#define BOZORTH3_DEFAULT_THRESHOLD 40
+#define MIN_ACCEPTABLE_MINUTIAE 10
+
 struct fp_img_driver {
 	struct fp_driver driver;
 	uint16_t flags;
@@ -304,6 +307,9 @@ extern struct fp_img_driver upektc_img_driver;
 #endif
 #ifdef ENABLE_ETES603
 extern struct fp_img_driver etes603_driver;
+#endif
+#ifdef ENABLE_VCS
+extern struct fp_img_driver validity_driver;
 #endif
 
 extern libusb_context *fpi_usb_ctx;

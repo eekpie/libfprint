@@ -40,6 +40,7 @@ enum {
 	UPEKTC_IMG_ID	= 17,
 	ETES603_ID	= 18,
 	VFS5011_ID	= 19,
+	VCS_ID		= 20,
 };
 
 #endif
